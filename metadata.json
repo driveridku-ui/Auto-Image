@@ -1,0 +1,6 @@
+{
+  "name": "Generator Gambar dan Video",
+  "description": "Aplikasi generator gambar dan video berbasis library referensi menggunakan model Gemini dan Google Veo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
