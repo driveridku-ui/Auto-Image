@@ -5,6 +5,7 @@
  */
 
 export interface DesignTheme {
+  id: string;
   name: string;
   overlayColor: string; // gradient color
   textColor: string;
@@ -12,13 +13,115 @@ export interface DesignTheme {
   glowColor: string;
   filter: string;
   particles: string[];
+  spotlight?: boolean;
+  leafShadows?: boolean;
+  waterRipples?: boolean;
+  foodSteam?: boolean;
+  waterSplash?: boolean;
+  rusticSurface?: boolean;
+  goldenSunrays?: boolean;
+  bokehCircles?: boolean;
+  darkChiaroscuro?: boolean;
 }
 
 export function detectTheme(prompt: string): DesignTheme {
   const p = prompt.toLowerCase();
   
+  if (p.includes('produk') || p.includes('studio-produk') || p.includes('commercial-clean') || p.includes('spotlight') || p.includes('softbox') || p.includes('studio product')) {
+    return {
+      id: 'studio-produk',
+      name: 'Studio Produk Premium',
+      overlayColor: 'rgba(6, 182, 212, 0.1)',
+      textColor: '#ffffff',
+      fontFamily: 'system-ui, sans-serif',
+      glowColor: 'rgba(6, 182, 212, 0.7)',
+      filter: 'contrast(1.18) saturate(1.15) brightness(1.02)',
+      particles: ['rgba(6, 182, 212, 0.4)', 'rgba(255, 255, 255, 0.6)'],
+      spotlight: true,
+      bokehCircles: true,
+    };
+  }
+  
+  if (p.includes('kuliner') || p.includes('makanan') || p.includes('food') || p.includes('gourmet') || p.includes('culinary')) {
+    const isDark = p.includes('moody') || p.includes('dark') || p.includes('chiaroscuro') || p.includes('steam');
+    if (isDark) {
+      return {
+        id: 'moody-food',
+        name: 'Moody Food Art',
+        overlayColor: 'rgba(20, 15, 10, 0.35)',
+        textColor: '#ffd166',
+        fontFamily: 'Georgia, serif',
+        glowColor: 'rgba(239, 137, 88, 0.6)',
+        filter: 'contrast(1.3) brightness(0.85) saturate(0.95)',
+        particles: ['rgba(239, 137, 88, 0.25)', 'rgba(255, 255, 255, 0.2)'],
+        darkChiaroscuro: true,
+        foodSteam: true,
+        rusticSurface: true,
+      };
+    }
+    return {
+      id: 'editorial-kuliner',
+      name: 'Editorial Kuliner',
+      overlayColor: 'rgba(217, 119, 6, 0.15)',
+      textColor: '#fffbeb',
+      fontFamily: 'Georgia, serif',
+      glowColor: 'rgba(245, 158, 11, 0.5)',
+      filter: 'contrast(1.15) saturate(1.3) brightness(1.05)',
+      particles: ['rgba(251, 191, 36, 0.3)'],
+      rusticSurface: true,
+      goldenSunrays: true,
+    };
+  }
+  
+  if (p.includes('kosmetik') || p.includes('beauty') || p.includes('pastel') || p.includes('minimalis') || p.includes('cosmetic')) {
+    return {
+      id: 'kosmetik-minimalis',
+      name: 'Kosmetik & Minimalis Luxe',
+      overlayColor: 'rgba(253, 244, 245, 0.12)',
+      textColor: '#334155',
+      fontFamily: 'system-ui, sans-serif',
+      glowColor: 'rgba(244, 63, 94, 0.3)',
+      filter: 'contrast(1.05) saturate(1.1) brightness(1.05)',
+      particles: ['rgba(244, 63, 94, 0.2)', 'rgba(253, 224, 228, 0.4)'],
+      leafShadows: true,
+      waterRipples: true,
+    };
+  }
+
+  if (p.includes('kafe') || p.includes('cafe') || p.includes('dessert') || p.includes('kopi') || p.includes('coffee') || p.includes('pastry')) {
+    return {
+      id: 'kafe-dessert',
+      name: 'Kafe & Dessert Warm',
+      overlayColor: 'rgba(120, 53, 4, 0.18)',
+      textColor: '#ffedd5',
+      fontFamily: 'Georgia, serif',
+      glowColor: 'rgba(217, 119, 6, 0.6)',
+      filter: 'sepia(0.25) contrast(1.12) saturate(1.15) brightness(0.98)',
+      particles: ['rgba(251, 191, 36, 0.4)', 'rgba(120, 53, 4, 0.3)'],
+      foodSteam: true,
+      bokehCircles: true,
+      rusticSurface: true,
+    };
+  }
+
+  if (p.includes('splash') || p.includes('dinamis') || p.includes('speed') || p.includes('air') || p.includes('action')) {
+    return {
+      id: 'splash-creative',
+      name: 'Produk Splash & Dinamis',
+      overlayColor: 'rgba(6, 182, 212, 0.08)',
+      textColor: '#00f3ff',
+      fontFamily: 'system-ui, sans-serif',
+      glowColor: 'rgba(6, 182, 212, 0.8)',
+      filter: 'contrast(1.22) saturate(1.45) brightness(1.03)',
+      particles: ['rgba(6, 182, 212, 0.6)', 'rgba(255, 255, 255, 0.7)'],
+      waterSplash: true,
+      waterRipples: true,
+    };
+  }
+
   if (p.includes('neon') || p.includes('cyber') || p.includes('futur') || p.includes('blue') || p.includes('purple')) {
     return {
+      id: 'cyber',
       name: 'Cyberpunk Neon',
       overlayColor: 'rgba(238, 0, 153, 0.2)',
       textColor: '#00f3ff',
@@ -26,35 +129,27 @@ export function detectTheme(prompt: string): DesignTheme {
       glowColor: 'rgba(0, 243, 255, 0.8)',
       filter: 'contrast(1.2) saturate(1.5) hue-rotate(10deg)',
       particles: ['rgba(0, 243, 255, 0.6)', 'rgba(238, 0, 153, 0.6)'],
+      spotlight: true,
     };
   }
   
-  if (p.includes('vintage') || p.includes('retro') || p.includes('classic') || p.includes('old') || p.includes('travel')) {
+  if (p.includes('vintage') || p.includes('retro') || p.includes('classic') || p.includes('old') || p.includes('analog') || p.includes('film')) {
     return {
-      name: 'Vintage Retro',
+      id: 'vintage',
+      name: 'Vintage Retro / Film',
       overlayColor: 'rgba(198, 137, 88, 0.25)',
       textColor: '#ffebc2',
       fontFamily: 'Georgia, serif',
       glowColor: 'rgba(198, 137, 88, 0.5)',
-      filter: 'sepia(0.6) contrast(0.9) brightness(1.05)',
-      particles: ['rgba(239, 195, 143, 0.4)', 'rgba(127, 85, 57, 0.3)'],
-    };
-  }
-
-  if (p.includes('minimal') || p.includes('clean') || p.includes('black') || p.includes('white') || p.includes('luxury')) {
-    return {
-      name: 'Minimalist Luxe',
-      overlayColor: 'rgba(0, 0, 0, 0.4)',
-      textColor: '#ffffff',
-      fontFamily: 'system-ui, sans-serif',
-      glowColor: 'rgba(255, 255, 255, 0.3)',
-      filter: 'grayscale(0.3) contrast(1.15)',
-      particles: ['rgba(255, 255, 255, 0.5)'],
+      filter: 'sepia(0.4) contrast(0.9) brightness(1.02)',
+      particles: ['rgba(239, 195, 143, 0.3)', 'rgba(127, 85, 57, 0.2)'],
+      goldenSunrays: true,
     };
   }
 
   // Default: Creative Vibrant
   return {
+    id: 'vibrant',
     name: 'Vibrant Creative',
     overlayColor: 'rgba(79, 70, 229, 0.15)',
     textColor: '#f9fafb',
@@ -140,6 +235,225 @@ export function renderSimulatedImage(
       );
 
       const theme = detectTheme(prompt);
+
+      // --- ADVANCED PROCEDURAL PHOTOSHOOT EFFECTS ---
+      
+      // 1. Dark Chiaroscuro (Moody Food / Products)
+      if (theme.darkChiaroscuro) {
+        ctx.save();
+        const maskGrad = ctx.createRadialGradient(w * 0.5, h * 0.45, w * 0.1, w * 0.5, h * 0.45, w * 0.7);
+        maskGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+        maskGrad.addColorStop(0.4, 'rgba(0, 0, 0, 0.3)');
+        maskGrad.addColorStop(1, 'rgba(0, 0, 0, 0.85)');
+        ctx.fillStyle = maskGrad;
+        ctx.fillRect(0, 0, w, h);
+        ctx.restore();
+      }
+
+      // 2. Spotlight (Studio Produk)
+      if (theme.spotlight) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'screen';
+        const spotlightGrad = ctx.createRadialGradient(w / 2, h / 2, 40 * scale, w / 2, h / 2, w * 0.75);
+        spotlightGrad.addColorStop(0, 'rgba(34, 211, 238, 0.35)'); // Glowing cyan spotlight center
+        spotlightGrad.addColorStop(0.3, 'rgba(168, 85, 247, 0.12)'); // Soft purple rim
+        spotlightGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = spotlightGrad;
+        ctx.beginPath();
+        ctx.arc(w / 2, h / 2, w * 0.9, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // 3. Golden Sunrays (Editorial Kuliner / Golden Hour)
+      if (theme.goldenSunrays) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'screen';
+        const sunbeamGrad = ctx.createLinearGradient(0, 0, w, h);
+        sunbeamGrad.addColorStop(0, 'rgba(251, 191, 36, 0.25)'); // Rich amber
+        sunbeamGrad.addColorStop(0.6, 'rgba(253, 224, 71, 0.08)');
+        sunbeamGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = sunbeamGrad;
+
+        // Diagonal beam polygons
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(w * 0.35, 0);
+        ctx.lineTo(w * 0.75, h);
+        ctx.lineTo(w * 0.15, h);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(w * 0.15, 0);
+        ctx.lineTo(w * 0.28, 0);
+        ctx.lineTo(w * 0.95, h);
+        ctx.lineTo(w * 0.45, h);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // 4. Creamy Bokeh Circles (Dessert / Studio)
+      if (theme.bokehCircles) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'screen';
+        const bColors = ['rgba(251, 191, 36, 0.15)', 'rgba(34, 211, 238, 0.10)', 'rgba(255, 255, 255, 0.12)'];
+        // Deterministic placements to prevent flickering
+        const seedVal = copywriting.length || 7;
+        for (let i = 0; i < 10; i++) {
+          const bx = ((seedVal * (i + 1) * 31) % (w * 0.8)) + w * 0.1;
+          const by = ((seedVal * (i + 1) * 73) % (h * 0.55)) + h * 0.1;
+          const br = (((seedVal * i * 19) % 35) + 20) * scale;
+          const bColor = bColors[i % bColors.length];
+          ctx.beginPath();
+          ctx.arc(bx, by, br, 0, Math.PI * 2);
+          ctx.fillStyle = bColor;
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      // 5. Wood Tabletop Surface (Editorial Kuliner / Cafe Warm)
+      if (theme.rusticSurface) {
+        ctx.save();
+        const surfaceY = h * 0.73;
+        const surfaceH = h * 0.27;
+
+        // Draw tabletop background base
+        const tabletopGrad = ctx.createLinearGradient(0, surfaceY, 0, h);
+        tabletopGrad.addColorStop(0, 'rgba(115, 76, 50, 0.35)'); // Warm brown wood tone
+        tabletopGrad.addColorStop(1, 'rgba(50, 25, 10, 0.8)');
+        ctx.fillStyle = tabletopGrad;
+        ctx.fillRect(0, surfaceY, w, surfaceH);
+
+        // Draw horizontal wood grain lines
+        ctx.strokeStyle = 'rgba(254, 215, 170, 0.12)';
+        ctx.lineWidth = 1 * scale;
+        for (let i = 0; i < 5; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, surfaceY + (surfaceH / 5) * i);
+          ctx.bezierCurveTo(
+            w * 0.3, surfaceY + (surfaceH / 5) * i + 8 * scale,
+            w * 0.7, surfaceY + (surfaceH / 5) * i - 8 * scale,
+            w, surfaceY + (surfaceH / 5) * i
+          );
+          ctx.stroke();
+        }
+
+        // Add contact drop shadow at the edge of the tabletop
+        const shadowGrad = ctx.createLinearGradient(0, surfaceY - 12 * scale, 0, surfaceY);
+        shadowGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+        shadowGrad.addColorStop(1, 'rgba(0, 0, 0, 0.45)');
+        ctx.fillStyle = shadowGrad;
+        ctx.fillRect(0, surfaceY - 12 * scale, w, 12 * scale);
+        ctx.restore();
+      }
+
+      // 6. Food Steam / Hot Wisps (Culinary / Hot Drinks)
+      if (theme.foodSteam) {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+        ctx.lineWidth = 2.5 * scale;
+        ctx.filter = 'blur(5px)';
+
+        // Rise 3 elegant steam waves from bottom/center
+        const startXCoords = [w * 0.42, w * 0.5, w * 0.58];
+        startXCoords.forEach((startX, idx) => {
+          ctx.beginPath();
+          ctx.moveTo(startX, h * 0.78);
+          ctx.bezierCurveTo(
+            startX - 18 * scale * (idx + 1), h * 0.58,
+            startX + 22 * scale * (idx + 1), h * 0.38,
+            startX - 8 * scale, h * 0.18
+          );
+          ctx.stroke();
+        });
+        ctx.restore();
+      }
+
+      // 7. Water Splash Beads (Dynamic Splash)
+      if (theme.waterSplash) {
+        ctx.save();
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.shadowColor = 'rgba(34, 211, 238, 0.5)';
+        ctx.shadowBlur = 8 * scale;
+
+        const dropletCount = 20;
+        for (let i = 0; i < dropletCount; i++) {
+          const t = i / dropletCount;
+          const angle = Math.PI * (0.15 + 0.7 * t);
+          const distance = (100 + 180 * Math.sin(t * Math.PI)) * scale;
+          const dx = w / 2 + Math.cos(angle) * distance;
+          const dy = h * 0.65 - Math.sin(angle) * distance;
+          const radius = (1.5 + Math.random() * 4) * scale;
+
+          ctx.beginPath();
+          ctx.arc(dx, dy, radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      // 8. Water Ripple Ellipses (Beauty / Minimalis / Liquid)
+      if (theme.waterRipples) {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+        ctx.shadowColor = 'rgba(34, 211, 238, 0.3)';
+        ctx.shadowBlur = 6 * scale;
+
+        const centerX = w * 0.55;
+        const centerY = h * 0.55;
+
+        for (let rWidth = 35; rWidth <= 155; rWidth += 40) {
+          ctx.beginPath();
+          ctx.ellipse(
+            centerX, 
+            centerY, 
+            rWidth * scale, 
+            (rWidth * 0.42) * scale, 
+            Math.PI * -0.08, 
+            0, 
+            Math.PI * 2
+          );
+          ctx.lineWidth = (1.2 - (rWidth / 220)) * scale;
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      // 9. Elegant Window/Plant Shadows (Cosmetic Minimalist)
+      if (theme.leafShadows) {
+        ctx.save();
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.18)'; // Ultra-soft leaf shadow mask
+        ctx.filter = 'blur(10px)';
+
+        ctx.beginPath();
+        // Main stem
+        ctx.moveTo(w, 0);
+        ctx.bezierCurveTo(w * 0.75, h * 0.2, w * 0.45, h * 0.35, w * 0.25, h * 0.55);
+        
+        // Render 5 elegant organic leaf pairs along the stem
+        for (let i = 1; i <= 5; i++) {
+          const ratio = i / 6;
+          const lx = w - (w * 0.75 * ratio);
+          const ly = h * 0.35 * ratio;
+          
+          // Left leaf
+          ctx.moveTo(lx, ly);
+          ctx.quadraticCurveTo(lx - 40 * scale, ly - 10 * scale, lx - 70 * scale, ly + 15 * scale);
+          ctx.quadraticCurveTo(lx - 30 * scale, ly + 25 * scale, lx, ly);
+
+          // Right leaf
+          ctx.moveTo(lx, ly);
+          ctx.quadraticCurveTo(lx + 10 * scale, ly + 40 * scale, lx + 20 * scale, ly + 70 * scale);
+          ctx.quadraticCurveTo(lx - 10 * scale, ly + 30 * scale, lx, ly);
+        }
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // -----------------------------------------------
 
       // Apply Filter via Canvas Overlay
       ctx.save();
