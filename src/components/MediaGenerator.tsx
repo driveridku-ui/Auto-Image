@@ -10,12 +10,12 @@ interface MediaGeneratorProps {
 }
 
 const PRESETS = [
-  { id: 'studio-editorial', label: '📸 Editorial Studio', prompt: 'Professional editorial studio photography, dramatic clean lighting, high fashion photoshoot, sharp focused details, shot on Hasselblad 100mp, highly detailed skin texture' },
-  { id: 'outdoor-golden', label: '☀️ Golden Hour', prompt: 'Gaya fotografi outdoor portraiture saat golden hour, cahaya hangat alami menyinari subjek dari belakang, bokeh latar belakang yang halus dan creamy, nuansa sinematik lembut' },
-  { id: 'street-moody', label: '🏙️ Moody Street', prompt: 'Moody candid street photography, natural ambient city lighting, realistic reflections on pavement, cinematic color grading, rich shadows, captured on Leica M11, 35mm lens' },
-  { id: 'commercial-clean', label: '📦 Commercial Clean', prompt: 'Clean professional commercial product and advertising photoshoot, extremely sharp details, perfectly balanced softbox studio lighting, minimal solid color backdrop, high-end catalog style' },
-  { id: 'analog-film', label: '🎞️ Analog Film', prompt: 'Authentic 35mm film photography photoshoot, vintage film grain texture, natural warm tones, Kodak Portra 400 look, nostalgic and raw documentary aesthetic, soft realistic shadows' },
-  { id: 'monochrome', label: '🖤 Black & White', prompt: 'Elegant high-contrast black and white fine art photography, professional studio portraiture style, rich grayscale tones, dramatic shadow and light interplay, timeless classic look' },
+  { id: 'studio-produk', label: '📦 Studio Produk Premium', prompt: 'High-end professional studio product photography, elegant commercial advertising style, pristine sharp focus on the item, clean minimal background with soft gradient shadow, professional softbox and spotlight rim lighting, shot on Hasselblad 100MP, sharp material texture' },
+  { id: 'editorial-kuliner', label: '🍽️ Editorial Kuliner', prompt: 'Gourmet culinary food photography, premium food styling on a rustic surface, soft natural window side-lighting, organic textures, high-contrast fine art culinary magazine look, shallow depth of field, sharp appetizing details, shot on Canon EOS R5' },
+  { id: 'kosmetik-minimalis', label: '✨ Kosmetik & Minimalis', prompt: 'Luxury cosmetic beauty product photoshoot, clean airy aesthetic, soft pastel background, realistic water ripples and reflections, elegant hard sunlight shadow play, high-fashion branding design, ultra sharp product textures' },
+  { id: 'kafe-dessert', label: '☕ Kafe & Dessert Warm', prompt: 'Cozy warm cafe ambiance food photography, freshly served dessert and pastry photoshoot, authentic rustic wooden plate, beautiful creamy bokeh background, realistic warm lighting, extremely delicious details, nostalgic cinematic mood' },
+  { id: 'splash-creative', label: '⚡ Produk Splash & Dinamis', prompt: 'Vibrant dynamic commercial product photoshoot, action water splash or powder dust particle splash, floating levitation concept, ultra-sharp detail, high-speed shutter photography style, intense professional studio lighting setup, clean studio backdrop' },
+  { id: 'moody-food', label: '🖤 Moody Food Art', prompt: 'Dark moody fine-art food photography, rustic atmosphere, dark textured stone backdrop, dramatic chiaroscuro single-light source, authentic steam or hot smoke rising, fresh ingredients scatter, extremely rich textures, cinematic food styling' },
 ];
 
 export default function MediaGenerator({
